@@ -1,137 +1,134 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# ------------------------------------------------------------
+#  ZSHRC – Oh My Zsh + Powerlevel10k
+#  Keep this file as close to the top of your home directory
+#  as possible.  Anything that may ask for user input (e.g.
+#  passwords, [y/n] prompts) should be placed **before** the
+#  instant‑prompt block.
+# ------------------------------------------------------------
+
+# -----------------------------------------------------------------
+#  Powerlevel10k – instant prompt (must stay near the top)
+# -----------------------------------------------------------------
+# If the cached instant‑prompt file exists, source it to speed up
+# the first prompt rendering.  This file is created automatically
+# by `p10k configure --instant-prompt`.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# -----------------------------------------------------------------
+#  General environment – PATH, language, etc.
+# -----------------------------------------------------------------
+# NOTE:  PATH entries are appended *once* to avoid duplicate
+#        additions when the file is sourced multiple times.
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Home‑brew (Linuxbrew) – make its binaries available
+if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Go language toolchain
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# Initialize Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Go environment
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-# bun
+# Bun (JavaScript runtime)
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# NVM configuration
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Deno (installed via the installer script)
+# The env file sets DENO_INSTALL and updates PATH.
+if [[ -f "$HOME/.deno/env" ]]; then
+  . "$HOME/.deno/env"
+fi
 
-# Add local bin to PATH
+# NVM – Node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"          # load nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# User‑local binaries (e.g. pipx, cargo, custom scripts)
 export PATH="$HOME/.local/bin:$PATH"
-export GTK_THEME=Adwaita:dark
-export QT_STYLE_OVERRIDE=Adwaita-Dark
-. "/home/sakshyam/.deno/env"
+
+# Desktop theme (GTK & Qt)
+export GTK_THEME="Adwaita:dark"
+export QT_STYLE_OVERRIDE="Adwaita-Dark"
+
+
+# -----------------------------------------------------------------
+#  Oh My Zsh configuration
+# -----------------------------------------------------------------
+export ZSH="$HOME/.oh-my-zsh"        # Oh My Zsh installation directory
+
+# Theme – Powerlevel10k (the fast, highly‑configurable prompt)
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Plugins – keep the list short for faster startup
+plugins=(
+  git            # essential VCS helpers
+)
+
+# Load Oh My Zsh
+source "$ZSH/oh-my-zsh.sh"
+
+
+# -----------------------------------------------------------------
+#  Powerlevel10k runtime configuration
+# -----------------------------------------------------------------
+# If you have run `p10k configure` a ~/.p10k.zsh file exists.
+# It contains all prompt customisations (colors, segments, etc.).
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+
+# -----------------------------------------------------------------
+#  Optional user customisations
+# -----------------------------------------------------------------
+# Place your own aliases, functions, and other tweaks **below**.
+# Keeping them separate from the core Oh My Zsh block makes it
+# easier to upgrade Oh My Zsh later.
+
+# Function to fuzzy find a directory, create a tmux session, and attach
+function ff() {
+  local dir session_name win_name
+
+  # 1. Use fzf to select a directory
+  # We don't use fzf-tmux here because we might not be in tmux yet
+  dir=$(find "$HOME" -maxdepth 4 -type d -not -path '*/.*' 2>/dev/null | fzf --prompt="Select directory: " )
+
+  if [[ -n "$dir" ]]; then
+    # 2. Get the basename of the selected directory to use as the session name
+    session_name=$(basename "$dir")
+
+    # Sanitize session name (remove spaces/special chars if needed, optional)
+    session_name=$(echo "$session_name" | tr ' ' '_')
+
+    # 3. Check if a tmux session with that name already exists
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+      # Session exists, attach to it
+      echo "Attaching to existing tmux session: $session_name"
+      tmux attach-session -t "$session_name"
+    else
+      # Session does not exist, create a new one in the target directory
+      # -d flag creates it in detached mode first
+      tmux new-session -d -s "$session_name" -c "$dir"
+      echo "Created new tmux session '$session_name' in $dir"
+
+      # Now attach to the newly created session
+      tmux attach-session -t "$session_name"
+    fi
+  else
+    echo "No directory selected. Exiting ff function."
+  fi
+}
+
+# Bind the function to the 'ff' command in your shell
+autoload -Uz ff
+
+# Example alias (uncomment to use)
+# alias zshconfig="nano ~/.zshrc"
+# alias ohmyzsh="nano ~/.oh-my-zsh"
+
+# -----------------------------------------------------------------
+#  End of ~/.zshrc
+# -----------------------------------------------------------------
