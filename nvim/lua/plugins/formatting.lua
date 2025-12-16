@@ -14,7 +14,7 @@ return {
         json = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
-        astro = { "prettier" }, -- Astro formatting
+        astro = { "prettier" },
         rust = { "rustfmt" },
       },
       format_on_save = {
