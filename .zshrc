@@ -62,11 +62,15 @@ export QT_STYLE_OVERRIDE="Adwaita-Dark"
 export ZSH="$HOME/.oh-my-zsh"        # Oh My Zsh installation directory
 
 # Theme – Powerlevel10k (the fast, highly‑configurable prompt)
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME=""
 
 # Plugins – keep the list short for faster startup
+fpath+=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions/src
 plugins=(
   git            # essential VCS helpers
+  zsh-completions
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 # Load Oh My Zsh
@@ -129,6 +133,11 @@ autoload -Uz ff
 # alias zshconfig="nano ~/.zshrc"
 # alias ohmyzsh="nano ~/.oh-my-zsh"
 
+# Set the correct TERM environment variable for Kitty
+[ ! -z "$KITTY_WINDOW_ID" ] && export TERM=xterm-kitty
+
 # -----------------------------------------------------------------
 #  End of ~/.zshrc
 # -----------------------------------------------------------------
+eval "$(starship init zsh)"
+

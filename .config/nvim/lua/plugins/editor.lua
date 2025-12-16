@@ -37,24 +37,58 @@ return {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
         dependencies = { "nvim-lua/plenary.nvim" },
+        pickers = {
+            find_files = {
+                hidden = true, -- Shows hidden files in find_files
+            },
+        },
+        config = function()
+            require("telescope").setup({
+                defaults = {
+                    file_ignore_patterns = { "node_modules", ".git/" },
+                    -- Required for hidden files to show in live_grep and grep_string
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        "--hidden", -- Enables hidden file searching in grep
+                    },
+                },
+                pickers = {
+                    find_files = {
+
+                        hidden = true,
+                    },
+                    -- live_grep does not support a 'hidden' key directly;
+                    -- it uses vimgrep_arguments or additional_args
+                    live_grep = {
+                        additional_args = function(opts)
+                            return { "--hidden" }
+                        end,
+                    },
+                },
+            })
+        end,
         keys = {
             { "<leader>pf", "<cmd>Telescope find_files<CR>", desc = "Find files" },
             { "<C-p>",      "<cmd>Telescope git_files<CR>",  desc = "Git files" },
             {
                 "<leader>ps",
                 function()
-                    require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
+                    -- Explicitly passing hidden here for custom grep functions
+                    require("telescope.builtin").grep_string({
+                        search = vim.fn.input("Grep > "),
+                        additional_args = { "--hidden" }
+                    })
                 end,
                 desc = "Grep search"
             },
         },
-        config = function()
-            require("telescope").setup({
-                defaults = { file_ignore_patterns = { "node_modules", ".git/" } },
-            })
-        end,
     },
-
     {
         "theprimeagen/harpoon",
         dependencies = { "nvim-lua/plenary.nvim" },

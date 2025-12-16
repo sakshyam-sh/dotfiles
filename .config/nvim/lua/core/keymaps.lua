@@ -54,5 +54,5 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make exec
 
 -- Source current file
 map("n", "<leader><leader>", function()
-  vim.cmd("so")
+    vim.cmd("so")
 end, { desc = "Source file" })
