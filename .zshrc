@@ -141,3 +141,8 @@ autoload -Uz ff
 # -----------------------------------------------------------------
 eval "$(starship init zsh)"
 
+
+# bun completions
+[ -s "/home/sakshyam/.bun/_bun" ] && source "/home/sakshyam/.bun/_bun"
+
+export PATH=$PATH:/usr/local/go/bin
