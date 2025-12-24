@@ -1,67 +1,94 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "tomorrow-night"
+
+[theme.overrides]
+separator = " "
+
+[icons]
+icons = "awesome6"
+
 [[block]]
-block = "focused_window"
-format = " $title.str(max_w:50) |"
+block = "custom"
+command = "echo '  '"
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "playerctl previous"
+[block.theme_overrides]
+separator = ""
+
+[[block]]
+block = "music"
+format = " $icon  $combo.str(max_w:40) "
+[[block.click]]
+button = "left"
+cmd = "playerctl play-pause"
+[block.theme_overrides]
+separator = ""
+
+[[block]]
+block = "custom"
+command = "echo '  '"
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "playerctl next"
 
 [[block]]
 block = "disk_space"
 path = "/"
 info_type = "available"
-format = " $icon $available "
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " $icon  root: $available "
 
 [[block]]
 block = "memory"
-format = " $icon $mem_used_percents "
+format = " $icon  $mem_used_percents "
+format_alt = " $icon_swap $swap_used_percents "
+warning_mem = 70
+critical_mem = 95
 
 [[block]]
 block = "cpu"
-format = " $icon $utilization "
-
-[[block]]
-block = "temperature"
-format = " $icon $max "
-chip = "*-isa-*"
-interval = 5
-
-[[block]]
-block = "net"
-format = " $icon $ip "
-missing_format = " No Network "
+interval = 1
+format = "  $icon $utilization"
+info_cpu = 20
+warning_cpu = 50
+critical_cpu = 90
 
 [[block]]
 block = "sound"
-format = " $icon $volume "
-
-[[block]]
-block = "backlight"
-format = " $icon $brightness "
-missing_format = ""
-
-[[block]]
-block = "battery"
-format = " $icon $percentage "
-missing_format = ""
+format = " $icon  $volume "
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
 
 [[block]]
 block = "time"
-format = " $icon $timestamp.datetime(f:'%a %d %b %I:%M %p') "
-interval = 60
+interval = 5
+format = " $timestamp.datetime(f:'%a %d/%m %R') "
 
 [[block]]
 block = "menu"
-text = " ⏻ "
+text = " ⏻  "
 
 [[block.items]]
-display = " Lock"
+display = " Lock "
 cmd = "loginctl lock-session"
 
 [[block.items]]
-display = "󰍃 Logout"
+display = "󰍃 Logout "
 cmd = "i3-msg exit"
 
 [[block.items]]
-display = " Reboot"
+display = " Reboot "
 cmd = "systemctl reboot"
 
 [[block.items]]
-display = " Shutdown"
+display = " Shutdown "
 cmd = "systemctl poweroff"
