@@ -1,9 +1,30 @@
 return {
     {
+        "barrettruth/import-cost.nvim",
+        ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
+        build = "./install.sh yarn", -- uses yarn to install the node server
+        config = function()
+            local ok, ic = pcall(require, "import-cost")
+            if not ok then
+                return
+            end
+
+            ic.setup({
+                display_mode = true,
+            })
+        end,
+    },
+
+    {
         "stevearc/oil.nvim",
         lazy = false,
         config = function()
-            require("oil").setup({
+            local ok, oil = pcall(require, "oil")
+            if not ok then
+                return
+            end
+
+            oil.setup({
                 default_file_explorer = true,
                 keymaps = {
                     ["g?"] = "actions.show_help",
@@ -20,16 +41,8 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {},
         keys = {
-            {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
+            { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",              desc = "Diagnostics (Trouble)" },
+            { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
         },
     },
 
@@ -37,16 +50,15 @@ return {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
         dependencies = { "nvim-lua/plenary.nvim" },
-        pickers = {
-            find_files = {
-                hidden = true, -- Shows hidden files in find_files
-            },
-        },
         config = function()
-            require("telescope").setup({
+            local ok, telescope = pcall(require, "telescope")
+            if not ok then
+                return
+            end
+
+            telescope.setup({
                 defaults = {
-                    file_ignore_patterns = { "node_modules", ".git/" },
-                    -- Required for hidden files to show in live_grep and grep_string
+                    file_ignore_patterns = { "node_modules", "%.git/" },
                     vimgrep_arguments = {
                         "rg",
                         "--color=never",
@@ -55,18 +67,15 @@ return {
                         "--line-number",
                         "--column",
                         "--smart-case",
-                        "--hidden", -- Enables hidden file searching in grep
+                        "--hidden",
                     },
                 },
                 pickers = {
                     find_files = {
-
                         hidden = true,
                     },
-                    -- live_grep does not support a 'hidden' key directly;
-                    -- it uses vimgrep_arguments or additional_args
                     live_grep = {
-                        additional_args = function(opts)
+                        additional_args = function()
                             return { "--hidden" }
                         end,
                     },
@@ -79,16 +88,16 @@ return {
             {
                 "<leader>ps",
                 function()
-                    -- Explicitly passing hidden here for custom grep functions
                     require("telescope.builtin").grep_string({
                         search = vim.fn.input("Grep > "),
-                        additional_args = { "--hidden" }
+                        additional_args = { "--hidden" },
                     })
                 end,
-                desc = "Grep search"
+                desc = "Grep search",
             },
         },
     },
+
     {
         "theprimeagen/harpoon",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -105,48 +114,56 @@ return {
     { "f-person/git-blame.nvim", event = "BufReadPost" },
 
     {
-        {
-            "m4xshen/autoclose.nvim",
-            event = "InsertEnter",
-            config = function()
-                require("autoclose").setup({
-                    options = {
-                        disabled_filetypes = { "text" },
-                        disable_when_touch = false,
-                        touch_regex = "[%w(%[{]",
-                        pair_spaces = false,
-                        auto_indent = true,
-                        disable_command_mode = true, -- This disables autoclose in command mode
-                    },
-                    disabled_buftypes = {
-                        "prompt",
-                    },
-                })
-            end,
-        },
-        {
-            "numToStr/Comment.nvim",
-            event = "VeryLazy",
-            config = function()
-                require("Comment").setup({
-                    toggler = {
-                        line = "<leader>/",
-                    },
-                    opleader = {
-                        line = "<leader>/",
-                    },
-                })
-            end,
-        },
+        "m4xshen/autoclose.nvim",
+        event = "InsertEnter",
+        config = function()
+            local ok, autoclose = pcall(require, "autoclose")
+            if not ok then
+                return
+            end
 
-        {
-            "supermaven-inc/supermaven-nvim",
-            lazy = false,
-            config = function()
-                require("supermaven-nvim").setup({})
-            end,
-        }
+            autoclose.setup({
+                options = {
+                    disabled_filetypes = { "text" },
+                    disable_when_touch = false,
+                    touch_regex = "[%w(%[{]",
+                    pair_spaces = false,
+                    auto_indent = true,
+                    disable_command_mode = true,
+                },
+                disabled_buftypes = { "prompt" },
+            })
+        end,
+    },
 
-    }
+    {
+        "numToStr/Comment.nvim",
+        event = "VeryLazy",
+        dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+        config = function()
+            local ok, comment = pcall(require, "Comment")
+            if not ok then
+                return
+            end
 
+            comment.setup({
+                toggler = { line = "<leader>/" },
+                opleader = { line = "<leader>/" },
+                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+            })
+        end,
+    },
+
+    {
+        "supermaven-inc/supermaven-nvim",
+        lazy = false,
+        config = function()
+            local ok, sm = pcall(require, "supermaven-nvim")
+            if not ok then
+                return
+            end
+
+            sm.setup({})
+        end,
+    },
 }

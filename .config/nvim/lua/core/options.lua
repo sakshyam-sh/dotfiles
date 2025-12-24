@@ -54,3 +54,4 @@ opt.timeoutlen = 300
 -- Misc
 opt.mouse = "a"
 opt.showmode = false
+opt.guifont = "Jetbrains:h10"

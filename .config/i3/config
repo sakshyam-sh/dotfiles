@@ -15,69 +15,17 @@ client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 
-exec --no-startup-id feh --bg-scale /home/sakshyam/Pictures/Fantasy - Sunset.png
+# ================= Wallpaper =================
+exec_always --no-startup-id feh --bg-fill "/home/sakshyam/Pictures/wallpaper.jpg"
 
-# Use Kitty as terminal
+# ================= Terminal =================
 set $term /home/sakshyam/.local/kitty.app/bin/kitty
 bindsym $mod+Return exec --no-startup-id $term
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-# Assign applications to specific workspaces
-assign [class="zen"] $ws1
-assign [class="kitty"] $ws2
-assign [class="tivazo"] $ws3
-
-# Autostart applications on login
-exec --no-startup-id zen-browser
-exec --no-startup-id $term
-exec --no-startup-id tivazo
-
-# Application launcher (rofi)
-bindsym $mod+d exec --no-startup-id rofi -show drun
-
-# Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# Arrow keys
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# Arrow keys
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# Split orientation
-bindsym $mod+b split h
-bindsym $mod+v split v
-
-# Fullscreen
-bindsym $mod+f fullscreen toggle
-
-# Layout
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# Floating
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-
-# Workspaces
+# ================= Workspaces =================
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -89,7 +37,56 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Switch workspaces
+# Assign applications
+assign [class="zen"] $ws1
+assign [class="kitty"] $ws2
+assign [class="tivazo"] $ws3
+
+# Autostart apps
+exec --no-startup-id zen-browser
+exec --no-startup-id $term
+exec --no-startup-id tivazo
+
+# ================= Launcher =================
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# ================= Focus =================
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# ================= Move =================
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# ================= Layout =================
+bindsym $mod+b split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# ================= Floating =================
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# ================= Workspace switching =================
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -101,7 +98,6 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-# Move container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -113,12 +109,12 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# Reload/Restart
+# ================= Reload / Exit =================
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
 
-# Resize mode
+# ================= Resize mode =================
 mode "resize" {
     bindsym h resize shrink width 10 px or 10 ppt
     bindsym j resize grow height 10 px or 10 ppt
@@ -136,27 +132,25 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Volume controls
+# ================= Media =================
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
-# Brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 
-# Screenshot
+# ================= Screenshot =================
 bindsym Print exec --no-startup-id scrot ~/Pictures/screenshot_%Y%m%d_%H%M%S.png
 
-# Lock screen
+# ================= Lock =================
 bindsym $mod+x exec --no-startup-id i3lock -c 282a36
 
-# Autostart
+# ================= Autostart =================
 exec --no-startup-id picom -b
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
 exec --no-startup-id nm-applet
 
-# i3status-rust bar
+# ================= Bar =================
 bar {
     font pango:JetBrainsMono Nerd Font 9
     position top
@@ -171,3 +165,4 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
+

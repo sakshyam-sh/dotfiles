@@ -1,0 +1,27 @@
+# Core visual settings
+theme = Catppuccin Mocha
+font-family = Iosevka, monospace
+font-size = 14
+font-feature = -liga -calt
+
+# Remove titlebar completely (Linux)
+window-decoration = none
+
+# Slight transparency
+background-opacity = 0.92
+
+# Window padding & geometry
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+
+# Initial window size in grid cells (columns x rows)
+window-width = 120
+window-height = 38
+
+# Don't confirm close
+confirm-close-surface = false
+
+# Cursor (steady block, no blink)
+cursor-style = block
+cursor-style-blink = false

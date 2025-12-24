@@ -14,6 +14,7 @@ items=(
     ".config/nvim:$CONFIG_DIR/nvim"
     ".config/starship.toml:$CONFIG_DIR/starship.toml"
     ".config/kitty:$CONFIG_DIR/kitty"
+    ".config/ghostty:$CONFIG_DIR/ghostty"
 )
 
 echo "Linking dotfiles..."
