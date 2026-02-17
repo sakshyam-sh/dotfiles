@@ -2,16 +2,11 @@ return {
     {
         "barrettruth/import-cost.nvim",
         ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
-        build = "./install.sh yarn", -- uses yarn to install the node server
+        build = "./install.sh yarn",
         config = function()
-            local ok, ic = pcall(require, "import-cost")
-            if not ok then
-                return
-            end
-
-            ic.setup({
+            vim.g.import_cost = {
                 display_mode = true,
-            })
+            }
         end,
     },
 

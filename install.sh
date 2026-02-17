@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 
 DOTFILES_DIR="$HOME/personal/dotfiles"
@@ -58,6 +57,7 @@ common_items=(
 i3_items=(
     ".config/i3:$CONFIG_DIR/i3"
     ".config/i3status-rust:$CONFIG_DIR/i3status-rust"
+    ".config/picom:$CONFIG_DIR/picom"
 )
 
 hyprland_items=(

@@ -1,13 +1,7 @@
-# ----------------------
-# Homebrew (Linuxbrew)
-# ----------------------
 if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# ----------------------
-# PATH and toolchains
-# ----------------------
 export PATH="$HOME/.cargo/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
@@ -23,13 +17,9 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Desktop theme
 export GTK_THEME="Adwaita:dark"
 export QT_STYLE_OVERRIDE="Adwaita-Dark"
 
-# ----------------------
-# Oh My Zsh basic config
-# ----------------------
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 
@@ -46,16 +36,10 @@ plugins=(
 
 source "$ZSH/oh-my-zsh.sh"
 
-# ----------------------
-# Starship prompt
-# ----------------------
 if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# ----------------------
-# ff function: fuzzy tmux attach/create
-# ----------------------
 ff() {
   local dir session_name
   dir=$(find "$HOME" -maxdepth 4 -type d -not -path '*/.*' 2>/dev/null | fzf)
@@ -69,20 +53,13 @@ ff() {
   fi
 }
 
-# ----------------------
-# Kitty terminal support
-# ----------------------
 [ -n "$KITTY_WINDOW_ID" ] && export TERM=xterm-kitty
 
-# Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-
-# bun completions
 [ -s "/home/sakshyam/.bun/_bun" ] && source "/home/sakshyam/.bun/_bun"
 
-# Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-# opencode
 export PATH=/home/sakshyam/.opencode/bin:$PATH
+alias lsync='nvim --headless "+Lazy! sync" +q'

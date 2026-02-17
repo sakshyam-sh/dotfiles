@@ -7,12 +7,12 @@ theme = "tomorrow-night"
 separator = " "
 
 [icons]
-icons = "awesome6"
+icons = "none"
 
 [[block]]
 block = "custom"
-command = "echo '  '"
-interval = "once"
+command = "echo 'P'"
+interval = 1
 [[block.click]]
 button = "left"
 cmd = "playerctl previous"
@@ -21,7 +21,7 @@ separator = ""
 
 [[block]]
 block = "music"
-format = " $icon  $combo.str(max_w:40) "
+format = " $icon  $combo.str(max_w:15) "
 [[block.click]]
 button = "left"
 cmd = "playerctl play-pause"
@@ -30,11 +30,13 @@ separator = ""
 
 [[block]]
 block = "custom"
-command = "echo '  '"
-interval = "once"
+command = "echo 'N'"
+interval = 1
 [[block.click]]
 button = "left"
 cmd = "playerctl next"
+[block.theme_overrides]
+separator = ""
 
 [[block]]
 block = "disk_space"
@@ -72,23 +74,3 @@ cmd = "pavucontrol"
 block = "time"
 interval = 5
 format = " $timestamp.datetime(f:'%a %d/%m %R') "
-
-[[block]]
-block = "menu"
-text = " ⏻  "
-
-[[block.items]]
-display = " Lock "
-cmd = "loginctl lock-session"
-
-[[block.items]]
-display = "󰍃 Logout "
-cmd = "i3-msg exit"
-
-[[block.items]]
-display = " Reboot "
-cmd = "systemctl reboot"
-
-[[block.items]]
-display = " Shutdown "
-cmd = "systemctl poweroff"
