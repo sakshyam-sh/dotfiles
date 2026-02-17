@@ -1,6 +1,6 @@
 # Core visual settings
-theme = Catppuccin Mocha
-font-family = Iosevka, monospace
+theme = Rose Pine
+font-family = "JetBrains Mono"
 font-size = 14
 font-feature = -liga -calt
 
@@ -25,3 +25,4 @@ confirm-close-surface = false
 # Cursor (steady block, no blink)
 cursor-style = block
 cursor-style-blink = false
+

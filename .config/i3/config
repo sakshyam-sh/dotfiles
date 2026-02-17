@@ -19,7 +19,7 @@ client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 exec_always --no-startup-id feh --bg-fill "/home/sakshyam/Pictures/wallpaper.jpg"
 
 # ================= Terminal =================
-set $term /home/sakshyam/.local/kitty.app/bin/kitty
+set $term /snap/ghostty/current/bin/ghostty
 bindsym $mod+Return exec --no-startup-id $term
 
 # Kill focused window
