@@ -15,8 +15,8 @@ window-padding-balance = true
 confirm-close-surface = false
 
 # Active window indicator
-window-active-background = "#6272A4"
-window-inactive-background = "#282A36"
+# Note: window-active-background and window-inactive-background are not valid Ghostty options
+# For unfocused split dimming, use: unfocused-split-opacity and unfocused-split-fill
 
 # Cursor
 cursor-style = block
