@@ -36,12 +36,27 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-assign [class="zen"] $ws1
-assign [class="kitty"] $ws2
-assign [class="tivazo"] $ws3
+# Workspace assignments to monitors
+workspace $ws1 output DP-1
+workspace $ws2 output HDMI-2
+workspace $ws3 output HDMI-2
+workspace $ws4 output HDMI-2
+workspace $ws5 output HDMI-2
+workspace $ws6 output HDMI-2
+workspace $ws7 output HDMI-2
+workspace $ws8 output HDMI-2
+workspace $ws9 output HDMI-2
+workspace $ws10 output HDMI-2
 
-exec --no-startup-id $term
-exec --no-startup-id tivazo
+for_window [class="firefox"] move workspace $ws1
+for_window [class="Firefox"] move workspace $ws1
+for_window [class="firefox-developer-edition"] move workspace $ws1
+for_window [class="ghostty"] move workspace $ws2
+for_window [class="tivazo"] move workspace $ws2
+
+exec --no-startup-id i3-msg 'workspace 1; exec firefox-developer-edition --new-window'
+exec --no-startup-id i3-msg 'workspace 2; exec ghostty --class ghostty'
+exec --no-startup-id i3-msg 'workspace 2; exec tivazo'
 
 bindsym $mod+d exec --no-startup-id rofi -show drun
 
@@ -135,8 +150,8 @@ exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id nm-applet
 
 bar {
-    font pango:JetBrains Mono 11
-    position top
+    font pango:JetBrains Mono 10
+    position bottom
     status_command /home/sakshyam/.cargo/bin/i3status-rs ~/.config/i3status-rust/config.toml
 
     colors {
