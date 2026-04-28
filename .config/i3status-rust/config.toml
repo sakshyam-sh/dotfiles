@@ -19,17 +19,17 @@ cmd = "playerctl previous"
 [block.theme_overrides]
 separator = ""
 
-[[block]]
-block = "music"
-player = "playerctld"
-format = " {$combo|No Music} "
-interface_name_exclude = ["firefox"]
-
-[block.theme_overrides]
-separator = ""
-[[block.click]]
-button = "left"
-cmd = "playerctl play-pause"
+# [[block]]
+# block = "music"
+# player = "playerctld"
+# format = " {$combo|No Music} "
+# interface_name_exclude = ["firefox"]
+#
+# [block.theme_overrides]
+# separator = ""
+# [[block.click]]
+# button = "left"
+# cmd = "playerctl play-pause"
 
 [[block]]
 block = "custom"

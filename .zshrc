@@ -63,3 +63,6 @@ ff() {
 
 export PATH=/home/sakshyam/.opencode/bin:$PATH
 alias lsync='nvim --headless "+Lazy! sync" +q'
+export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/node@22/lib"
+export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/node@22/include"

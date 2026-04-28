@@ -1,24 +1,21 @@
-# Theme
+# Theme (Updated for Ghostty 1.2+)
+# Use spaces and Title Case. Quotes are required because of the space.
 theme = "Rose Pine"
 
 # Font
 font-family = "JetBrains Mono"
 font-size = 14
-font-feature = liga,calt,dlig
-freetype-load-flags = autohint
+# Font features are now usually prefixed with + or -
+font-feature = ["+liga", "+calt", "+dlig"]
+freetype-load-flags = "autohint"
 
+# Window
 window-decoration = false
-
 window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
 confirm-close-surface = false
 
-# Active window indicator
-# Note: window-active-background and window-inactive-background are not valid Ghostty options
-# For unfocused split dimming, use: unfocused-split-opacity and unfocused-split-fill
-
 # Cursor
 cursor-style = block
 cursor-style-blink = false
-

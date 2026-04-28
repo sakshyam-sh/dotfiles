@@ -1,12 +1,42 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# --- TOP LEVEL CONFIGS ---
+# --- PERFORMANCE & BEHAVIOR ---
 add_newline = true
-scan_timeout = 1000 # Increased to 1 second
+# Global timeout to stop the warning (5 seconds)
+command_timeout = 5000
+# Faster scanning for large projects
+scan_timeout = 120
 
 [character]
-success_symbol = '[➜](bold green)'
+success_symbol = '[➜](bold #ebbcba)' # Matches Rosé Pine "Rose"
+error_symbol = '[➜](bold #eb6f92)'   # Matches Rosé Pine "Love"
+
+# --- LANGUAGE MODULES (Speed Optimized) ---
+[nodejs]
+# This stops Starship from running "node --version" constantly
+# It will only show if it finds a package.json or .node-version
+format = 'via [󰎙 $version](bold #f6c177) '
+detect_files = ['package.json', '.node-version']
+detect_extensions = ['js', 'ts', 'jsx', 'tsx']
+disabled = false
 
 [package]
 disabled = true
+
+# --- VISUALS (Rosé Pine Palette) ---
+[directory]
+style = "bold #31748f"   # Pine color
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = "󰊢 "
+style = "bold #9ccfd8" # Foam color
+
+[git_status]
+style = "bold #eb6f92"                               # Love color
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[rust]
+symbol = " "
+style = "bold #ebbcba"

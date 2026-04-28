@@ -2,15 +2,15 @@ set $mod Mod4
 
 font pango:JetBrains Mono 10
 
-gaps inner 8
+gaps inner 4
 gaps outer 2
 
-default_border pixel 8
+default_border pixel 2
 
-for_window [class="firefox"] border pixel 6
-for_window [class="ghostty"] border pixel 4
-for_window [class="kitty"] border pixel 4
-default_floating_border pixel 4
+for_window [class="firefox"] border pixel 2
+for_window [class="ghostty"] border pixel 2
+for_window [class="kitty"] border pixel 2
+default_floating_border pixel 2
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #F5C2E7 #6272A4 #F8F8F2 #6272A4   #F5C2E7
@@ -54,8 +54,8 @@ for_window [class="firefox-developer-edition"] move workspace $ws1
 for_window [class="ghostty"] move workspace $ws2
 for_window [class="tivazo"] move workspace $ws2
 
-exec --no-startup-id i3-msg 'workspace 1; exec firefox-developer-edition --new-window'
-exec --no-startup-id i3-msg 'workspace 2; exec ghostty --class ghostty'
+exec --no-startup-id i3-msg 'workspace 1; exec floorp --new-window'
+exec --no-startup-id i3-msg 'workspace 2; exec ghostty --class=ghostty'
 exec --no-startup-id i3-msg 'workspace 2; exec tivazo'
 
 bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -142,11 +142,11 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 
-bindsym Print exec --no-startup-id scrot ~/Pictures/screenshot_%Y%m%d_%H%M%S.png
+bindsym Print exec --no-startup-id "flameshot full -p ~/Pictures"
 
 bindsym $mod+x exec --no-startup-id i3lock -c 282a36
 
-exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
+#exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 exec --no-startup-id nm-applet
 
 bar {
